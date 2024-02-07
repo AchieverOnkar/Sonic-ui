@@ -1,0 +1,33 @@
+@use '../helpers' as h;
+
+.premium-ctn {
+    height: 150px;
+    width: 100%;
+    // background-color: aqua;
+    padding: 15px;
+    padding-left: 10px;
+    @include h.flexbox(column, center, flex-start);
+
+    .second {
+        font-family: var(--font-second);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--txt-color);
+    }
+
+    .first {
+        font-size: 2.2em;
+        font-weight: 600;
+        text-wrap: pretty;
+        color: var(--primary);
+    }
+
+    .b {
+        background-color: var(--primary);
+        margin: 10px 15px 0 0;
+        color: var(--txt-color);
+        // font-family: var(--font-second);
+        font-weight: 600;
+    }
+}

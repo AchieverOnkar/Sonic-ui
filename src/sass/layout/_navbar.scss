@@ -1,0 +1,28 @@
+@use '../helpers' as m;
+@use '../global';
+.hidden{
+    visibility: hidden;
+}
+.nav-container{
+   
+    @include m.flexbox(row, flex-end, center);
+    // // background-image: url(https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/heroes/knowledge-overview-bg-dark.jpg=w1860);
+    position: absolute;
+    top: 0;
+    right: 0;
+    // z-index: 99;
+    width: 80%;
+    height: 50px;
+    background-color:transparent;
+    padding-right: 30px;
+    
+    button{
+        @extend %button;
+        margin-right: 10px;
+        transition: ease-in all 0.2s;
+    }
+    .premium{
+        margin-right: 10px;
+    }
+
+}

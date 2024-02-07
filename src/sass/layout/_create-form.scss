@@ -1,0 +1,94 @@
+@use '../helpers' as h;
+.wrapper-ctn{
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button{
+        width: 100%;
+        background-color: royalblue;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    h1{
+        margin-top: 10px;
+        color: royalblue;
+    }
+   
+    
+    
+}
+
+.create-form {
+    @include h.flexbox(column, center, flex-start);
+    width: max-content;
+    // background-color: aqua;
+    overflow-x: hidden;
+    overflow-y: hidden; 
+    
+    label{
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    input {
+        height: 30px;
+        width: 100%;
+        border: 1px solid grey;
+        padding: 10px;
+        background-color: var(--fg-color);
+        border-radius: 5px;
+        outline: none;
+        color: var(--txt-color);
+        font-size: 16px;
+        transition: all 0.25s;
+
+        &::placeholder {
+            color: var(--txt-second);
+        }
+
+        &:focus {
+            background-color: var(--bg-color);
+        }
+
+    }
+
+    .songs {
+        img {
+            border-radius: 2px;
+            height: 50px;
+            width: 50px;
+            conobject-fit: cover;
+        }
+        p{
+            font-weight: 600;
+            font-size: 24px;
+            color: royalblue;
+            margin-top: 10px;
+            font-family: var(--font-second);
+            i{
+                color: aliceblue;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .songs-list {
+        background-color: var(--fg-color);
+        width: 100%;
+
+        td {
+            min-width: 50px;
+            padding: 2px 20px;
+        }
+
+        input[type="checkbox"] {
+            width: 50px;
+            height: 20px;
+        }
+    }
+
+}

@@ -1,0 +1,21 @@
+:root{
+    --bg-color: rgb(23, 23, 23);
+    --bg:hsl(0, 0%, 12%);
+    --fg:hsl(0, 1%, 22%);
+    --fg-color:hsl(0, 0%, 13%);
+    --txt-color: hsl(0, 0%, 100%);
+    --primary:royalblue;
+    --txt-second: #b2b2b2;
+    --font-second:"roboto-flex",sans-serif;
+    --box-shadow:0 4px 6px rgba(0,0,0,0.2);
+    --sonic:"sonic";
+}
+/* styles.scss */
+@font-face {
+    font-family: 'sonic';
+    src: url('./fonts/your-font-file.ttf') format('truetype');
+    src: url('../../../public/NiseSegaSonic.TTF') format('truetype');
+
+    /* Add other font properties like font-weight and font-style if needed */
+  }
+  

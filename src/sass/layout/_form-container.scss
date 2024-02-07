@@ -1,0 +1,157 @@
+@use '../helpers' as h;
+@use '../global' as c;
+
+
+.form-container {
+    @include h.flexbox(row, space-between, center);
+    width: 90vw;
+    height: 90vh;
+    margin: 5vh 5vw;
+    gap: 20px;
+    background-color: var(--fg-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+
+    .left {
+        position: relative;
+        height: 100%;
+        width: 50%;
+
+        img {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            width: 100%;
+            border-radius: 15px 0 0 15px;
+
+        }
+
+        .textArea {
+            position: absolute;
+            z-index: 99;
+            bottom: 50px;
+            left: 50px;
+            text-wrap: balance;
+
+            h1 {
+                font-size: 56px
+            }
+        }
+
+    }
+
+
+
+    .form-type1 {
+        @include h.flexbox(column);
+        min-width: 500px;
+        border: none;
+        outline: none;
+
+        .logo {
+            position: absolute;
+            top: 50px;
+            left: 70%;
+            padding-bottom: 10px;
+            margin: 0 auto;
+        }
+
+        legend {
+            font-size: 1.1;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        select {
+            min-height: 30px;
+            width: 85%;
+            font-size: 0.9em;
+            font-weight: 600;
+            padding: 0.9em;
+            border: 1px solid lightblue;
+            outline: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+    
+        }
+
+        * {
+            align-self: flex-start;
+        }
+
+        label {
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        input {
+            -webkit-appearance: none;
+            width: 100%;
+            max-width: 425px;
+            /* for safari date*/
+            min-height: calc(0.9em + (0.8em*2) + 0.6em);
+            padding: 0.8em;
+            font-size: 0.9em;
+            outline: none;
+            border: 1px solid lightblue;
+            border-radius: 4px;
+            background: #f9f9f9;
+            transition: all 0.25s;
+
+            &:focus {
+                background: lightblue;
+
+            }
+
+            &::placeholder {
+                color: #bbbbbb;
+
+            }
+        }
+
+        .form-error {
+            padding-top: 5px;
+            color: #d50000;
+            font-size: 0.9em;
+            /*hidden by default*/
+            visibility: hidden;
+        }
+
+        .submit-btn {
+           @extend %submit-button;
+        }
+
+        .link {
+            margin-top: 10px;
+
+            a {
+
+                color: #bbbbbb;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .other {
+            @include h.flexbox;
+            gap: 10px;
+            margin-top: 10px;
+
+            span {
+                color: #bbbbbb;
+            }
+
+            a {
+                color: royalblue;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+            }
+        }
+    }
+
+}

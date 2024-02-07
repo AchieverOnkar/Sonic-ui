@@ -1,0 +1,49 @@
+@use '../utils' as u;
+@use '../global';
+@use '../helpers' as m;
+
+.main-container {
+    @include m.flexbox;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    .sidebar {
+        @include m.flexbox(column, flex-start);
+        background-color: var(--fg-color);
+        width: 20%;
+        height: 100%;
+        padding-top: 20px;
+
+        a {
+            color: var(--txt-color);
+        }
+
+        .logo {
+
+            font-family: var(--sonic);
+            font-weight: 300;
+            background: linear-gradient(to top, #1A2B5F, royalblue);
+            -webkit-background-clip: text;
+            color: transparent;
+            padding: 0 20px 10px;
+            border-bottom: 1px solid rgb(64, 62, 62);
+
+            i {
+                font-weight: 700;
+            }
+
+        }
+
+    }
+
+    .main {
+        @include m.flexbox(column);
+        background-color: var(--bg-color);
+        width: 80%;
+        padding-left: 10px;
+        gap: 20px;
+        height: 100%;
+    }
+
+}

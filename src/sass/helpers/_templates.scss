@@ -1,0 +1,151 @@
+@use './mixins' as h;
+%button{
+    border: none;
+    padding: 10px 15px;
+    background-color: royalblue;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400px;
+    a{
+        color: white;
+        font-weight: 600;
+    }
+    &:hover{
+        padding: 11px 16px;
+    }
+}
+
+%submit-button{
+    border: none;
+    // max-width: 150px;
+    font-weight: 600;
+    padding: 10px 16px;
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    background: rgb(23, 79, 183);
+
+    &:hover {
+        background-color: rgb(57, 100, 231);
+    }
+
+}
+
+%form1{
+    
+    @include h.flexbox(column);
+    min-width: 500px;
+    border: none;
+    outline: none;
+
+    .logo {
+        position: absolute;
+        top: 50px;
+        left: 70%;
+        padding-bottom: 10px;
+        margin: 0 auto;
+    }
+
+    legend {
+        font-size: 1.1;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    select {
+        min-height: 30px;
+        width: 85%;
+        font-size: 0.9em;
+        font-weight: 600;
+        padding: 0.9em;
+        border: 1px solid lightblue;
+        outline: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+
+    }
+
+    * {
+        align-self: flex-start;
+    }
+
+    label {
+        font-weight: 600;
+        padding: 10px 0;
+    }
+
+    input {
+        width: 100%;
+        max-width: 425px;
+        /* for safari date*/
+        min-height: calc(0.9em + (0.8em*2) + 0.6em);
+        padding: 0.8em;
+        font-size: 0.9em;
+        outline: none;
+        border: 1px solid lightblue;
+        border-radius: 4px;
+        background: #f9f9f9;
+        transition: all 0.25s;
+
+        &:focus {
+            background: lightblue;
+
+        }
+
+        &::placeholder {
+            color: #bbbbbb;
+
+        }
+    }
+
+    .form-error {
+        padding-top: 5px;
+        color: #d50000;
+        font-size: 0.9em;
+        /*hidden by default*/
+        visibility: hidden;
+    }
+
+    .submit-btn {
+       @extend %submit-button;
+    }
+
+    .link {
+        margin-top: 10px;
+
+        a {
+
+            color: #bbbbbb;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .other {
+        @include h.flexbox;
+        gap: 10px;
+        margin-top: 10px;
+
+        span {
+            color: #bbbbbb;
+        }
+
+        a {
+            color: royalblue;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+        }
+    }
+}
+
+button:disabled{
+    opacity: 0.5;
+}

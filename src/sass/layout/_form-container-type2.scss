@@ -1,0 +1,28 @@
+@use './changePassword-form';
+@use '../helpers' as h;
+.form-container-type2{
+    @include h.flexbox(column,center,center);
+    width: 50%;
+    height: 350px;
+    margin: 100px auto;
+    
+    // gap: 15px;
+    border-radius: 5px;
+    background-color: var(--fg-color);
+    h1{
+        font-size: 48px;
+        color: royalblue;
+        margin-right: 50px;
+    }
+    
+    input{
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+   button{
+    @extend %submit-button;
+    width: 85%;
+    height: 45px;
+   }
+
+}

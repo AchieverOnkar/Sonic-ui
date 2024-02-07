@@ -1,0 +1,153 @@
+@use '../helpers' as h;
+@use '../utils' as u;
+
+.table-container {
+    @include h.flexbox(column);
+    width: 100%;
+    overflow-y: auto;
+    max-height: 100vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color:var(--bg-color);
+    padding-right: 15px;
+    padding-left: 5px;
+
+    #song-img{
+        padding: 220px 0 0 30px;
+        margin-bottom: 100px;
+    }
+    .image {
+        // margin-top: 200px;
+        padding: 100px 0 10px 30px;
+        background-image: url(../../assets/bg10.jpg);
+        background-size: cover;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+        // background-color:var(--fg-color);
+        .img-head{
+            color: var(--primary);
+            font-size: 92px;
+            font-weight: 600;
+        }
+        
+    }
+}
+
+.song-name{
+    text-align: left;
+    text-wrap: balance;
+  font-weight: 600;
+   font-family: var(--font-second);
+}
+.artist-name{
+    color: var( --txt-second);
+   font-family: var(--font-second);
+    font-weight: 400;
+
+}
+
+.table {
+    width: 100%;
+    background-color: var(--fg-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    border-radius: 10px;
+
+    thead {
+        min-width: 100%;
+        height: 40px;
+        color: #b8b5b5;
+        font-weight: 400;
+        border-bottom: 1px solid #b8b5b5;
+        text-align: center;
+        line-height: 2px;
+        padding-bottom: 10px;
+    }
+
+    tbody {
+        tr {
+            min-height: 40px;
+            // border-bottom: 1px solid var(--fg-color);
+            transition: linear all 0.1s;
+         
+            &:last-of-type{
+                border-bottom: 5px solid #e31b23;
+            }
+            &:hover {
+                background-color: royalblue;
+
+                .play {
+                    transition: linear all 0s;
+                    border: 1px solid wheat;
+                    // border: none;
+                    border-radius: 10px;
+                    color: white;
+                    background-color: transparent;
+                    visibility: visible;
+                    cursor: pointer;
+                    transition: transform 0.5s ease-in-out;
+                    transform: scale(1.2);
+                }
+            }
+
+            .play {
+                transition: linear all 0s;
+                visibility: hidden;
+                font-size: 20px;
+            }
+
+            td {
+                padding: 0 15px;
+                text-align: center;
+
+                &:first-child {
+                    font-weight: 700;
+                    font-family: u.$font-para;
+                    // background-color: #e31b23;
+                }
+
+                img {
+                    min-width: 50px;
+                    min-height: 50px;
+                    border-radius: 4px;
+                }
+
+                audio {
+                    min-width: 100%;
+                    max-width: 100px;
+                    margin: 0 auto;
+
+                    &:hover {
+                        filter: brightness(1.2);
+                    }
+                }
+
+                form {
+                    button {
+                        background-color: inherit;
+                        border: none;
+                        border-radius: 50%;
+                        cursor: pointer;
+
+                      .ri-heart-3-line {
+                            font-size: 26px;
+                            color: var(--txt-second);
+                            transition: all ease-in 0.3s ;
+                            &:hover {
+                                font-size: 30px;
+                            }
+                        }
+                        .ri-heart-3-fill{
+                            transition: all ease-in 0.3s ;
+                            font-size: 26px;
+                            color: #e31b23;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

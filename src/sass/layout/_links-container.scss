@@ -1,0 +1,28 @@
+@use '../helpers' as *;
+
+
+
+.links-container {
+    @include flexbox(column, center, flex-start);
+
+
+    h4 {
+        text-align: center;
+
+        .links{
+            padding: 5px 20px;
+            border-radius: 5px;
+            transition: ease-in-out all 0.3ms;
+        }
+
+        i {
+            margin-right: 15px;
+        }
+
+        .active {
+            background-color: royalblue;
+        }
+
+    }
+
+}
