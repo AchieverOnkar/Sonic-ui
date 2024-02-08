@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import song1 from '../assets/Travis_Scott_-_SICKO_MODE_ft._Drake(128k).mp3'
-import song2 from '../assets/The_Weeknd_-_Starboy_ft._Daft_Punk_(Official_Video)(128k).mp3';
-import song3 from '../assets/_Into_the_Spider-Verse)(128k).mp3';
 import apiService from '../services/apiService';
 import {useFormik } from 'formik';
 import { handleSongCheckboxChange } from './CreateArtist';

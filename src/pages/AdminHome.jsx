@@ -1,11 +1,5 @@
-
 import React from 'react'
-import view1 from '../assets/view1.png';
-import view2 from '../assets/viewSong.png';
-import view3 from '../assets/songs.png';
-import add1 from '../assets/addArtist.png';
-import add2 from '../assets/addPlaylist.png';
-import add3 from '../assets/addSong.png';
+
 
 function AdminHome() {
     return (

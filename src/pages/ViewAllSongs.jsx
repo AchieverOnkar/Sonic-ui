@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import song1 from '../assets/Travis_Scott_-_SICKO_MODE_ft._Drake(128k).mp3'
 import apiService from '../services/apiService';
 import SyncLoader from 'react-spinners/SyncLoader';
 import toast from 'react-hot-toast';
@@ -8,8 +7,6 @@ const ViewAllSongs = () => {
     const [currentSongIndex, setCurrentSongIndex] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
-
-
     const [updating, setUpdating] = useState(false);
     const [isError, setIsError] = useState(false);
     const favbuttonFlag = { songId: 0, isActive: false };

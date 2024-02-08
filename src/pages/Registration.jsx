@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import axios from 'axios';
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import image from '../assets/main2.png';
 import apiService from '../services/apiService';
 import toast from 'react-hot-toast'

@@ -1,13 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import image from '../assets/weeknd.jpeg';
-import image2 from '../assets/justin.jpg';
-import image3 from '../assets/dua.jpg';
-import image4 from '../assets/bruno.jpg';
-import image5 from '../assets/garix.jpg';
-import image6 from '../assets/tylor2.jpg';
-import image7 from '../assets/eminem.jpg';
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import apiService from '../services/apiService';

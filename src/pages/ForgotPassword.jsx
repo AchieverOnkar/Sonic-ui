@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import image from '../assets/bg9.jpg';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import apiService from '../services/apiService';

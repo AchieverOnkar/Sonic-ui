@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import image from '../assets/wp2401089-imagine-dragons-2018-wallpapers.jpg';
 import apiService from '../services/apiService';
 import SyncLoader from 'react-spinners/SyncLoader';
 import toast from 'react-hot-toast';
-
-
-
 
 
 export default function PlaylistCard() {
