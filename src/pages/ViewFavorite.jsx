@@ -3,6 +3,7 @@ import image from '../assets/bg10.jpg';
 import SyncLoader from 'react-spinners/SyncLoader';
 import apiService from '../services/apiService';
 import toast from 'react-hot-toast';
+import heart from '../assets/heart.png'
 
 
 const ViewFavorite = () => {
@@ -11,7 +12,7 @@ const ViewFavorite = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const [updating,setUpdating] =useState(false);
+  const [updating, setUpdating] = useState(false);
 
   const handleSubmit = async (e, songId) => {
     e.preventDefault();
@@ -70,48 +71,53 @@ const ViewFavorite = () => {
 
 
   return (
-    <div className='table-container'>
-      <div className="image">
-        <span className='img-head'>favorites</span>
-        <p>Explore a diverse collection of songs from your favorite artists and genres.</p>
+    <div className='page-wrapper'>
+      <div className="profile">
+        <img className='small' src={heart} alt="broken" />
+        <div className="profile-text" >
+          <span className='profile-name large'>favorites</span>
+          <p className='profile-desc'>Explore a diverse collection of songs from your favorite artists and genres.</p>
+        </div>
       </div>
-      {favoriteSongs.length === 0 ? <h1>no favorite songs please add some songs to favorites</h1> :
-        <table className='table'>
-          <thead>
-            <tr>
-              <td>Poster</td>
-              <td>Artist</td>
-              <td>Song</td>
-              <td>Genre</td>
-              <td>Play</td>
-              <td>Remove</td>
-            </tr>
-          </thead>
-          <tbody>
-            {favoriteSongs.map(songs => (
-              <tr key={songs.id}>
-                <td>
-                  <img src={songs.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} />
-                </td>
-                <td>{songs.artist}</td>
-                <td>{songs.name}</td>
-                <td>{songs.genre}</td>
-                <td>
-                  <audio controls>
-                    <source src={songs.link} type="audio/mpeg" />
-                  </audio>
-                </td>
-                <td>
-                  <form   onSubmit={(e) => handleSubmit(e, songs.id)} >
-                    <input type="hidden" name="songId" value={songs.id} />
-                    <button type="submit" disabled={updating}>Remove</button>
-                  </form>
-                </td>
+      <div className='songs-table'>
+        {favoriteSongs.length === 0 ? <p className='error'>No favorite songs yet. <p>Discover and add some!</p></p> :
+          <table className='table'>
+            <thead>
+              <tr>
+                <td>Poster</td>
+                <td>Artist</td>
+                <td>Song</td>
+                <td>Genre</td>
+                <td>Play</td>
+                <td>Remove</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      }
+            </thead>
+            <tbody>
+              {favoriteSongs.map(songs => (
+                <tr key={songs.id}>
+                  <td>
+                    <img src={songs.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} />
+                  </td>
+                  <td>{songs.artist}</td>
+                  <td>{songs.name}</td>
+                  <td>{songs.genre}</td>
+                  <td>
+                    <audio controls>
+                      <source src={songs.link} type="audio/mpeg" />
+                    </audio>
+                  </td>
+                  <td>
+                    <form onSubmit={(e) => handleSubmit(e, songs.id)} >
+                      <input type="hidden" name="songId" value={songs.id} />
+                      <button type="submit" disabled={updating}>Remove</button>
+                    </form>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        }
+      </div>
     </div>
   );
 };

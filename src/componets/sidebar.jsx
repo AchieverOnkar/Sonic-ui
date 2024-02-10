@@ -9,7 +9,7 @@ export default function Sidebar() {
     return (
         <aside className='sidebar'>
           <div >
-            <h2 className="logo"><i class="ri-flashlight-line"></i>SONIC</h2>
+            <h2 className="logo">⚡<span>SONIC</span></h2>
           </div>
           <div className="links-container">
             <h4><NavLink className="links" to="/user/dashboard" ><i className="ri-speed-up-line"></i> Dashboard</NavLink></h4>

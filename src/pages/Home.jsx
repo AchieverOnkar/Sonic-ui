@@ -19,7 +19,7 @@ const Home = (props) => {
   return (
     <div className="home-container">
       <nav className={glassEffect ? "homenav glass" : "homenav"}>
-        <div className="logo"><i class="ri-flashlight-line"></i><span>SONIC</span></div>
+        <div className="logo">⚡<span>SONIC</span></div>
         <div className='btn-ctn'>
           <button className="btn filled"><Link to="/login" className='link'>Login</Link></button>
           <button className="btn"><Link to="/registration" className='link'>Register→</Link></button>

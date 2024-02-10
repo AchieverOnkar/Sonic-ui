@@ -97,7 +97,7 @@ export default function TopSongs() {
                         <tr key={song.id} onClick={() => playPauseSong(song.id)} className='row'>
                             <td className='rank'>{song.id}</td>
                             <td><img src={song.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} /></td>
-                            <td>{song.name}</td>
+                            <td className='songName'>{song.name}</td>
                             <td>{song.artist}</td>
                             <td >
                                 <button className='play' onClick={() => playPauseSong(song.id)}>
