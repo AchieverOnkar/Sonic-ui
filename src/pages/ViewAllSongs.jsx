@@ -11,7 +11,7 @@ const ViewAllSongs = () => {
     const [isError, setIsError] = useState(false);
     const favbuttonFlag = { songId: 0, isActive: false };
 
-    const changeButtonState = (songId) =>{
+    const changeButtonState = (songId) => {
         favbuttonFlag.songId = songId;
         favbuttonFlag.isActive = !favbuttonFlag.isActive;
     }
@@ -52,12 +52,14 @@ const ViewAllSongs = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setIsLoading(true);
-                setError(false);
-                const response = await apiService.get('/viewAllSongs');
-                setsongsList(response.data);
-                console.log(response.data);
-                setIsLoading(false);
+                if (!songsList.length) {
+                    setIsLoading(true);
+                    setError(false);
+                    const response = await apiService.get('/viewAllSongs');
+                    setsongsList(response.data);
+                    console.log(response.data);
+                    setIsLoading(false);
+                }
 
             } catch (error) {
                 setError(true);
@@ -66,7 +68,7 @@ const ViewAllSongs = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [songsList]);
 
     if (isLoading) {
         return (
@@ -155,9 +157,9 @@ const ViewAllSongs = () => {
                             <td>
                                 <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e, song.id) }} >
                                     <input type="hidden" name="songId" value={song.id} />
-                                    <button type="submit" disabled={updating} onClick={() =>changeButtonState(song.id)}>
+                                    <button type="submit" disabled={updating} onClick={() => changeButtonState(song.id)}>
                                         {(favbuttonFlag.songId === song.id && favbuttonFlag.isActive !== true) ?
-                                             <i className="ri-heart-3-line"></i> : <i className="ri-heart-3-fill"></i> }
+                                            <i className="ri-heart-3-line"></i> : <i className="ri-heart-3-fill"></i>}
                                     </button>
 
                                 </form>

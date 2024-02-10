@@ -7,6 +7,8 @@ import ViewAllSongs from './ViewAllSongs';
 import ViewPlaylist from './ViewPlaylist';
 import ViewFavorite from './ViewFavorite';
 import ViewAllArtist from './ViewAllArtist';
+import Playlist from '../componets/Playlist';
+import Artist from '../componets/Artist';
 
 
 
@@ -40,6 +42,8 @@ const UserDashboardRoutes = () => {
                 <Route path="dashboard" element={<UserHome />} />
                 <Route path="songs" element={<ViewAllSongs />} />
                 <Route path="playlist" element={<ViewPlaylist />} />
+                <Route path="viewPlaylist" element={<Playlist />} />
+                <Route path="viewArtist" element={<Artist />} />
                 <Route path="favorites" element={<ViewFavorite />} />
                 <Route path="artists" element={<ViewAllArtist />} />
             </Route>
