@@ -6,22 +6,26 @@
     border-radius: 5px;
     width: 30%;
     background-color: var(--fg-color);
+
     @include h.flexbox(column, flex-start);
 
-    .header-ctn{
+    .header-ctn {
         display: flex;
         width: 100%;
         padding: 13px 15px 5px;
         justify-content: space-between;
-       .a{
-         font-size: 14px;
-         &:hover{
-            text-decoration: underline;
-         }
+
+        .a {
+            font-size: 14px;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 
     .playlistcard-ctn {
+        cursor: pointer;
         display: grid;
         grid-template-columns: auto auto;
         grid-template-rows: auto;
@@ -32,38 +36,56 @@
             height: max-content;
             min-height: 70px;
             width: auto;
-            white-space: wrap; /* Corrected */
+            white-space: wrap;
+            /* Corrected */
             padding: 15px;
             border-radius: 2px;
             background-color: #6f9ed4;
+            transition: scale ease 0.3s;
 
+            &:hover {
+                scale: 1.05;
+            }
 
             .name {
-                white-space: balance; /* Corrected */
+                white-space: balance;
+                /* Corrected */
                 font-size: 14px;
                 font-weight: 600;
                 font-family: var(--font-second);
                 margin: auto;
             }
+        }
+    }
+}
+@media (max-width: 768px) {
 
-            // &:nth-child(1) {
-            //     background-color: #70c18a;
-            // }
-            // &:nth-child(2) {
-            //     background-color: #b687c7;
-            // }
-            // &:nth-child(3) {
-            //     background-color: #6f9ed4;
-            // }
-            // &:nth-child(4) {
-            //     background-color: #ffa580;
-            // }
-            // &:nth-child(5) {
-            //     background-color: #ebeaa5;
-            // }
-            // &:nth-child(6) {
-            //     background-color: #aaf0d1;
-            // }
+    .playlistcard {
+        height: auto; /* Remove fixed height */
+        width: 100%; /* Full width on mobile */
+        margin: 10px 0; /* Adjust margins */
+        padding: 10px;
+        margin-bottom: 50px;
+
+        .header-ctn {
+            padding: 5px; /* Reduce padding */
+        }
+
+        .playlistcard-ctn {
+            display: grid; /* Switch to flexbox for vertical layout */
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+            text-wrap: pretty;
+
+
+            .card {
+                width: 100%; /* Full width on mobile */
+                height: max-content; /* Allow content to fit */
+                padding: 8px; /* Adjust padding for touch */
+                margin: 0; /* Remove margin */
+                text-wrap: pretty;
+            }
         }
     }
 }

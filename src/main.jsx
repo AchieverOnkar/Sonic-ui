@@ -11,6 +11,8 @@ import ChangePassword from './pages/ChangePassword.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import RazorpayPaymentComponent from './pages/RazorpayPaymentComponent.jsx';
 import { Toaster } from 'react-hot-toast'
+import { Provider } from 'react-redux';
+import { store } from './store/store.js';
 
 const routing = (
   <Router>
@@ -53,7 +55,7 @@ const routing = (
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <Provider store={store}>
     {routing}
-  </React.StrictMode>
+  </Provider>
 );

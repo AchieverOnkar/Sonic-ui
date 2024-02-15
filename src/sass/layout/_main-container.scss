@@ -51,3 +51,35 @@
     }
 
 }
+
+// Desktop styles (unchanged)
+
+@media (max-width: 768px) { // Adjust breakpoint as needed
+
+    .main-container {
+        display: flex; // Switch to row-based layout
+        flex-direction: column; // Stack content vertically
+
+        .sidebar {
+            position: fixed; // Make sidebar fixed or sticky
+            top: 0;
+            left: 0;
+            width: 100%; // Take full width on mobile
+            height: auto; // Allow for variable content height
+            z-index: 100; // Ensure visibility over content
+            visibility: hidden;
+            @include m.flexbox(column, flex-start); // Maintain vertical layout
+
+            // Adapt logo, navigation, and other elements for mobile
+        }
+
+        .main {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: 100%;
+            margin-top: 56px; // Account for navbar height
+            padding: 10px; // Adjust padding for smaller screens
+        }
+    }
+}
+

@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function ViewUpdatePlaylist({ playlist, removeSongs }) {
   return (
-    <div>
-      <form >
+    <div className='wrapper-ctn'>
+      <form className='create-form'>
         <label htmlFor="playlistId">PlayList id: </label>
         <input type="text" id="playlistId" name="id" value={playlist.id} />
         <br />

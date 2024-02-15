@@ -67,7 +67,7 @@ export default function TopSongs() {
         }
         fetchData();
     }, []);
-
+    const top5Songs = songsList.slice(0, 5);
     if (loading) {
         return (
             <SyncLoader color='royalblue' />
@@ -93,12 +93,12 @@ export default function TopSongs() {
             <table className='songs'>
 
                 <tbody>
-                    {songsList.map(song => (
+                    {top5Songs.map(song => (
                         <tr key={song.id} onClick={() => playPauseSong(song.id)} className='row'>
                             <td className='rank'>{song.id}</td>
                             <td><img src={song.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} /></td>
                             <td className='songName'>{song.name}</td>
-                            <td>{song.artist}</td>
+                            <td className='artist-name'>{song.artist}</td>
                             <td >
                                 <button className='play' onClick={() => playPauseSong(song.id)}>
                                     {isPlaying && currentSongIndex === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}

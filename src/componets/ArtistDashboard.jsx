@@ -1,16 +1,26 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import apiService from '../services/apiService';
 import SyncLoader from "react-spinners/SyncLoader";
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addArtistId } from '../features/artistSlice';
 
 
 const ArtistDashboard = () => {
     const [artists, setArtists] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const getArtist = (artistId) => {
+      dispatch(addArtistId(artistId));
+      navigate('/user/viewArtist')
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,11 +41,7 @@ const ArtistDashboard = () => {
         fetchData();
     }, []);
 
-    if (isLoading) {
-        return (
-            <SyncLoader color="royalblue" />
-        )
-    }
+
 
     if (error) {
         return (
@@ -55,12 +61,12 @@ const ArtistDashboard = () => {
 
             <div className='card-wrapper'>
                 {artists.map(artist => (
-                    <Link to={`/artist/${artist.id}`} key={artist.id}>
+                    <div onClick={()=> getArtist(artist.id)} key={artist.id}>
                         <div className="artist-card">
                             <img src={artist.cover} alt="broken" className="artist-img" />
                             <span className="artist-name">{artist.name}</span>
                         </div>
-                    </Link>
+                    </div>
                 ))}
             </div>
         </div>

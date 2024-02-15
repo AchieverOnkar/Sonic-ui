@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SyncLoader from 'react-spinners/SyncLoader';
 import apiService from '../services/apiService';
 import toast from 'react-hot-toast';
-
-
-
-
-
-
+import { useDispatch } from 'react-redux';
+import {  addArtistId } from '../features/artistSlice';
 
 
 const ViewAllArtist = () => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const getArtistHandler = (artistId) => {
+    // Set the artistId in store
+    dispatch(addArtistId(artistId));
+
+    // Navigate to the artist component
+    navigate('/user/viewArtist');
+  };
+
 
 
 
@@ -55,8 +62,8 @@ const ViewAllArtist = () => {
       <span className='subtitle'>Explore All Popular Artist</span>
       <div className='card-container'>
         {artists.map(artist => (
-          <Link to={`/artist/${artist.id}`} >
-            <div className="card" key={artist.id}>
+          <div onClick={() => getArtistHandler(`${artist.id}`)} key={artist.id} >
+            <div className="card" >
               <button className='play' >
                 <i class="ri-play-mini-fill"></i>
               </button>
@@ -64,11 +71,11 @@ const ViewAllArtist = () => {
               <img src={artist.cover} alt="broken" className="poster" />
               {/* <span  className='name-header'>Artist</span> */}
               <span className="name">{artist.name}</span>
-              
+
               <span className="totalsongs">{artist.songs !== null && artist.songs.length} Tracks</span>
               {/* <button className="view">View</button> */}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

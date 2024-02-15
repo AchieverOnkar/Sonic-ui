@@ -164,3 +164,57 @@
     }
 
 }
+@media (max-width: 768px) {
+
+    .register-container {
+        width: 90vw; /* Full width on mobile */
+        height: auto; /* Remove fixed height */
+        margin: 10px auto; /* Adjust margins */
+        padding: 15px;
+
+        .left {
+            display: none;
+        }
+
+        form {
+            width: 100%;
+            min-width: unset; /* Remove min-width */
+            padding: 10px; /* Reduce padding */
+        }
+
+        .register-form {
+            grid-template-columns: repeat(1, 1fr); /* Single column layout */
+            gap: 25px;
+
+            .field-wrapper {
+                flex-direction: column; /* Stack elements vertically */
+                gap: 5px;
+            }
+        }
+
+        label {
+            font-size: 14px; /* Reduce font size */
+        }
+
+        input {
+            font-size: 16px; /* Reduce font size */
+            min-width: 100%; /* Full width on mobile */
+        }
+
+        .select-wrapper {
+            padding: 5px; /* Reduce padding */
+        }
+
+        select {
+            font-size: 16px; /* Reduce font size */
+        }
+
+        .other {
+            font-size: 14px; /* Reduce font size */
+        }
+
+        .submit-btn {
+            /* Apply mobile styles to submit button */
+        }
+    }
+}

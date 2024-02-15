@@ -1,12 +1,33 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import apiService from '../services/apiService';
-import {useFormik } from 'formik';
+import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import SyncLoader from 'react-spinners/SyncLoader';
 
 
 export default function CreateArtist() {
+
+    const handleSongCheckboxChange = (selectedSong) => {
+        const isSelected = formik.values.songs.some(song => song.id === selectedSong.id);
+        if (isSelected) {
+            // Remove the song if it's already selected
+            formik.setValues({
+                ...formik.values,
+                songs: formik.values.songs.filter(song => song.id !== selectedSong.id),
+            });
+        } else {
+            // Add the song if it's not selected
+            formik.setValues({
+                ...formik.values,
+                songs: [...formik.values.songs, selectedSong],
+            });
+        }
+    };
+
+
+
+
     const [songs, setSongs] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +54,7 @@ export default function CreateArtist() {
 
         onSubmit: async (values, { resetForm }) => {
             try {
+               
                 const res = await apiService.post('/addArtist', values);
                 if(res.data === 'success'){
                     toast.success("artist added!!");
@@ -41,14 +63,14 @@ export default function CreateArtist() {
                 }
                 resetForm();
             } catch (error) {
-                toast.error("Error submitting form: "+error);
+                toast.error("Error submitting form: " + error);
                 console.error('Error submitting form:', error);
             }
         },
     });
-    
-    
-    
+
+
+
     return (
         <div className='wrapper-ctn'>
             <form className='create-form' onSubmit={formik.handleSubmit} >
@@ -79,7 +101,7 @@ export default function CreateArtist() {
                 />
                 <br />
 
-                <button type='submit' className='button' disabled={formik.isSubmitting}>{formik.isSubmitting ? <SyncLoader color='white' size={5}/> : "Add Artist"}</button>
+                <button type='submit' className='button' disabled={formik.isSubmitting}>{formik.isSubmitting ? <SyncLoader color='white' size={5} /> : "Add Artist"}</button>
                 <div className="songs" >
 
                     <p>Select Existing Songs of Artist to Add  <i class="ri-checkbox-multiple-fill"></i></p>
@@ -100,7 +122,7 @@ export default function CreateArtist() {
                                             value={song.id}
                                             onChange={() => handleSongCheckboxChange(song)}
                                         />
-                                        
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -115,19 +137,3 @@ export default function CreateArtist() {
     );
 }
 
-export const handleSongCheckboxChange = (selectedSong) => {
-    const isSelected = formik.values.songs.some(song => song.id === selectedSong.id);
-    if (isSelected) {
-        // Remove the song if it's already selected
-        formik.setValues({
-            ...formik.values,
-            songs: formik.values.songs.filter(song => song.id !== selectedSong.id),
-        });
-    } else {
-        // Add the song if it's not selected
-        formik.setValues({
-            ...formik.values,
-            songs: [...formik.values.songs, selectedSong],
-        });
-    }
-};

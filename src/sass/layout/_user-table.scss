@@ -8,14 +8,15 @@
     max-height: 100vh;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background-color:var(--bg-color);
+    background-color: var(--bg-color);
     padding-right: 15px;
     padding-left: 5px;
 
-    #song-img{
+    #song-img {
         padding: 220px 0 0 30px;
         margin-bottom: 100px;
     }
+
     .image {
         // margin-top: 200px;
         padding: 100px 0 10px 30px;
@@ -24,25 +25,27 @@
         width: 100%;
         height: 300px;
         margin-bottom: 10px;
+
         // background-color:var(--fg-color);
-        .img-head{
+        .img-head {
             color: var(--primary);
             font-size: 92px;
             font-weight: 600;
         }
-        
+
     }
 }
 
-.song-name{
+.song-name {
     text-align: left;
     text-wrap: balance;
-  font-weight: 600;
-   font-family: var(--font-second);
+    font-weight: 600;
+    font-family: var(--font-second);
 }
-.artist-name{
-    color: var( --txt-second);
-   font-family: var(--font-second);
+
+.artist-name {
+    color: var(--txt-second);
+    font-family: var(--font-second);
     font-weight: 400;
 
 }
@@ -53,7 +56,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-collapse: collapse;
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
     border-radius: 10px;
 
     thead {
@@ -72,10 +75,11 @@
             min-height: 40px;
             // border-bottom: 1px solid var(--fg-color);
             transition: linear all 0.1s;
-         
-            &:last-of-type{
+
+            &:last-of-type {
                 border-bottom: 5px solid #e31b23;
             }
+
             &:hover {
                 background-color: royalblue;
 
@@ -132,19 +136,88 @@
                         border-radius: 50%;
                         cursor: pointer;
 
-                      .ri-heart-3-line {
+                        .ri-heart-3-line {
                             font-size: 26px;
                             color: var(--txt-second);
-                            transition: all ease-in 0.3s ;
+                            transition: all ease-in 0.3s;
+
                             &:hover {
                                 font-size: 30px;
                             }
                         }
-                        .ri-heart-3-fill{
-                            transition: all ease-in 0.3s ;
+
+                        .ri-heart-3-fill {
+                            transition: all ease-in 0.3s;
                             font-size: 26px;
                             color: #e31b23;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .table-container {
+        padding: 0 10px;
+        /* Reduce padding */
+    }
+
+    #song-img,
+    .image {
+        display: none;
+        /* Hide on mobile */
+    }
+
+    .song-name,
+    .artist-name {
+        font-size: 16px;
+        /* Reduce font sizes */
+    }
+
+    .table {
+        thead {
+            font-size: 14px;
+            height: 30px;
+            display: none;
+            .songid {
+                display: none;
+            }
+
+            text-overflow: ellipsis;
+        }
+
+        .none {
+            display: none;
+        }
+        .wrap{
+            white-space: nowrap; /* Prevent text from wrapping to the next line */
+            overflow: hidden; /* Hide content that overflows the div */
+            text-overflow: ellipsis;
+        }
+
+        tbody {
+            tr {
+                font-size: 14px;
+                min-height: 30px;
+                .songid {
+                    display: none;
+                }
+                td {
+                    padding: 5px 10px;
+
+                    img {
+                        max-width: 30px;
+                        max-height: 30px;
+                    }
+
+                    audio {
+                        max-width: 80%;
+                    }
+
+                    button {
                     }
                 }
             }

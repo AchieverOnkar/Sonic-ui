@@ -3,7 +3,7 @@
 
 .card-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto;
     // @include h.flexbox;
     justify-content: center;
@@ -106,5 +106,95 @@
 
     }
 
+    .playlistCard {
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        // height: 50px;
+        width: 200px;
+
+        .play {
+            top: 60%;
+            left: 30%;
+            opacity: 0;
+            transition: ease all 0.2s;
+            border-radius: 10px;
+            color: wheat;
+        }
+
+        .totalsongs {
+            color: wheat;
+        }
+    }
+
+
+}
+
+@media (max-width: 768px) {
+
+    .card-container {
+        width: 100vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin-left: 0;
+        padding-left: 0;
+        padding-bottom: 50px;
+        text-align: left;
+
+        .card {
+            max-width: 150px;
+            /* Adapt card width for smaller screens */
+            height: auto;
+            /* Remove fixed height */
+            max-height: 150px;
+            padding: 10px;
+            margin: 5px;
+            margin-left: 0;
+
+            .name-header,
+            .totalsongs {
+                font-size: 12px;
+                /* Reduce font sizes */
+            }
+
+            .name {
+                font-size: 16px;
+                /* Adjust font size */
+            }
+
+            .view {
+                font-size: 12px;
+                /* Reduce font size for button */
+            }
+
+            .play {
+                top: 50%;
+                /* Adjust play button position */
+                left: 40%;
+                font-size: 16px;
+                /* Increase icon size */
+            }
+        }
+
+        .playlistCard {
+            width: 100%;
+            text-wrap: pretty;
+          
+
+            .play {
+                /* Adapt play button styles for mobile */
+            }
+
+            .totalsongs {
+                /* Adjust totalsongs style for mobile */
+            }
+        }
+    }
 }

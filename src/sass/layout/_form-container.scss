@@ -10,7 +10,7 @@
     gap: 20px;
     background-color: var(--fg-color);
     border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 
     .left {
         position: relative;
@@ -62,6 +62,7 @@
             text-align: center;
             text-transform: uppercase;
         }
+
         select {
             min-height: 30px;
             width: 85%;
@@ -72,7 +73,7 @@
             outline: none;
             border-radius: 5px;
             margin-bottom: 10px;
-    
+
         }
 
         * {
@@ -118,7 +119,7 @@
         }
 
         .submit-btn {
-           @extend %submit-button;
+            @extend %submit-button;
         }
 
         .link {
@@ -154,4 +155,63 @@
         }
     }
 
+}
+
+@media (max-width: 768px) {
+
+    .form-container {
+
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 90vw;
+        height: 80vh;
+        margin: 100px auto;
+        padding: 15px;
+        overflow: hidden;
+
+        .left {
+            display: none;
+        }
+
+        .form-type1 {
+            width: 80vw;
+            min-width: unset;
+            
+            flex-direction: column;
+
+            .logo {
+                top: 150px;
+                left: 40%;
+            }
+
+            label {
+                font-size: 14px;
+                /* Reduce font size */
+            }
+
+            input {
+                max-width: 100%;
+                /* Input takes full width */
+                font-size: 16px;
+                /* Reduce font size */
+            }
+
+            .form-error {
+                /* Adapt error message visibility for mobile */
+            }
+
+            .submit-btn {
+                /* Apply mobile styles to submit button */
+            }
+
+            .link {
+                /* Adjust link appearance on mobile */
+            }
+
+            .other {
+                /* Adapt layout and spacing for mobile */
+            }
+        }
+    }
 }

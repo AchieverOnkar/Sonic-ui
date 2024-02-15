@@ -138,23 +138,23 @@ const ViewAllSongs = () => {
                 <table className='table'>
                     <thead>
                         <tr>
-                            <td>#</td>
+                            <td className='songid'>#</td>
                             <td>Poster</td>
                             <td>Song</td>
                             <td>Artist</td>
-                            <td></td>
-                            <td>Add to Favorite</td>
+                            <td className='none'></td>
+                            <td >Add to Favorite</td>
                         </tr>
                     </thead>
                     <tbody>
                         {songsList.map(song => (
                             <tr key={song.id} onClick={() => playPauseSong(song.id)}>
-                                <td>{song.id}</td>
+                                <td className='songid'>{song.id}</td>
                                 <td><img src={song.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} /></td>
                                 <td className='song-name'>{song.name}</td>
                                 <td className='artist-name'>{song.artist}</td>
 
-                                <td >
+                                <td className='playPause'>
                                     <button className='play' onClick={() => playPauseSong(song.id)}>
                                         {isPlaying && currentSongIndex === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
                                     </button>

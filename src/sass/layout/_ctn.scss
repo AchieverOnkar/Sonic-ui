@@ -35,3 +35,34 @@
     margin-top: 0;
     font-family: u.$font-para;
 }
+
+// Existing desktop styles
+
+@media (max-width: 768px) { // Adjust breakpoint as needed
+
+    .ctn {
+        width: 100%;
+        overflow-x: scroll;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center; // Switch to vertical layout
+        padding: 0 10px; // Adjust padding for mobile
+    }
+
+    .admin-ctn {
+    }
+
+    .ctn-column {
+        margin-top: 0; // Remove unnecessary margin
+    }
+
+    .title {
+        text-align: left;
+        margin-left: 0;
+        font-size: 48px; // Reduce font size
+    }
+
+    .subtitle {
+        margin-left: 0;
+    }
+}

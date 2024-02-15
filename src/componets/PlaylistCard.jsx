@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import apiService from '../services/apiService';
 import SyncLoader from 'react-spinners/SyncLoader';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addPlaylistId } from '../features/playlistSlice';
 
 
 export default function PlaylistCard() {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const getPlaylist = (PlaylistId) => {
+    dispatch(addPlaylistId(PlaylistId));
+    navigate('/user/viewPlaylist')
+  }
+
 
 
   useEffect(() => {
@@ -51,11 +60,11 @@ export default function PlaylistCard() {
       <div className="playlistcard-ctn">
 
         {playlists.map(playlist => (
-          <Link to={`/playlist/${playlist.id}`} >
-            <div className="card" key={playlist.id}>
+          <div onClick={()=> getPlaylist(playlist.id)} >
+            <div className="card" key={playlist.id} style={{backgroundColor:playlist.color}}>
               <p className='name'>{playlist.name}</p>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 

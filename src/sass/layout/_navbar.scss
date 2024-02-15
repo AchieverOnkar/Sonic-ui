@@ -1,28 +1,139 @@
 @use '../helpers' as m;
 @use '../global';
-.hidden{
+
+.hidden {
     visibility: hidden;
 }
-.nav-container{
-   
+
+.nav-container {
+
     @include m.flexbox(row, flex-end, center);
-    // // background-image: url(https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/heroes/knowledge-overview-bg-dark.jpg=w1860);
     position: absolute;
     top: 0;
     right: 0;
     // z-index: 99;
     width: 80%;
     height: 50px;
-    background-color:transparent;
+    background-color: transparent;
     padding-right: 30px;
-    
-    button{
+
+    .logo {
+        display: none;
+    }
+
+    button {
         @extend %button;
         margin-right: 10px;
         transition: ease-in all 0.2s;
     }
-    .premium{
+
+    .premium {
         margin-right: 10px;
     }
 
+}
+
+/* Overall structure */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: max-content;
+    background-color:rgb(46, 45, 45);
+    z-index: 99;
+    padding: 10px;
+    border-radius: 0 0px 10px 0;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu li {
+    margin-bottom: 10px;
+}
+
+.mobile-menu .links {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu .links:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Hamburger menu button */
+.hamburger-menu {
+    background-color: transparent;
+    border: wheat;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    
+}
+
+@media (min-width: 768px){
+    .out{
+        display: none;
+    }
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .mobile-menu {
+        display: block;
+        z-index: 100;
+        font-weight: 600;
+        color: royalblue;
+        /* Show menu on mobile */
+        i{
+            margin-right: 10px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .nav-container {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        background-image: none;
+
+        .logo {
+            display: flex;
+            margin: 0 auto;
+        }
+        .logout{
+            display: none;
+        }
+        button {
+            font-size: 16px;
+            padding: 8px;
+        }
+
+        .premium {
+            display: none;
+        }
+    }
 }

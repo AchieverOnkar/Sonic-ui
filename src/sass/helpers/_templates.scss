@@ -1,5 +1,6 @@
 @use './mixins' as h;
-%button{
+
+%button {
     border: none;
     padding: 10px 15px;
     background-color: royalblue;
@@ -7,20 +8,23 @@
     font-size: 14px;
     font-weight: 600;
     color: var(--txt-color);
-    i{
+
+    i {
         margin-right: 5px;
         font-weight: 600;
     }
-    a{
+
+    a {
         color: white;
         font-weight: 600;
     }
-    &:hover{
+
+    &:hover {
         border-radius: 15px;
     }
 }
 
-%submit-button{
+%submit-button {
     border: none;
     // max-width: 150px;
     font-weight: 600;
@@ -39,8 +43,18 @@
 
 }
 
-%form1{
-    
+@media only screen and (max-width: 768px) {
+
+    %button,
+    %submit-button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+
+%form1 {
+
     @include h.flexbox(column);
     min-width: 500px;
     border: none;
@@ -60,6 +74,7 @@
         text-align: center;
         text-transform: uppercase;
     }
+
     select {
         min-height: 30px;
         width: 85%;
@@ -115,7 +130,7 @@
     }
 
     .submit-btn {
-       @extend %submit-button;
+        @extend %submit-button;
     }
 
     .link {
@@ -151,6 +166,6 @@
     }
 }
 
-button:disabled{
+button:disabled {
     opacity: 0.5;
 }

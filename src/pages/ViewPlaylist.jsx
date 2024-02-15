@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
 import SyncLoader from 'react-spinners/SyncLoader';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addPlaylistId } from '../features/playlistSlice';
 
 
 
@@ -10,6 +12,12 @@ const ViewPlaylist = () => {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const getPlaylist = (PlaylistId) => {
+    dispatch(addPlaylistId(PlaylistId));
+    navigate('/user/viewPlaylist')
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,19 +58,15 @@ const ViewPlaylist = () => {
       <div className='card-container'>
 
         {playlists.map(playlist => (
-          <Link to={`/playlist/${playlist.id}`} >
-            <div className="card" key={playlist.id}>
+          <div onClick={()=> getPlaylist(playlist.id)} >
+            <div className="card playlistCard" key={playlist.id} style={{backgroundColor:playlist.color }}>
               <button className='play' >
                 <i class="ri-play-mini-fill"></i>
               </button>
-              <img src={playlist.posterLink} alt="broken" className="poster" />
-              {/* <span  className='name-header'>Artist</span> */}
               <span className="name">{playlist.name}</span>
               <span className="totalsongs">{playlist.songs.length} Tracks</span>
-
-              {/* <button className="view">View</button> */}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

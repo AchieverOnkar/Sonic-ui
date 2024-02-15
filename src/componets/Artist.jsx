@@ -1,24 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import apiService from '../services/apiService';
+import { SyncLoader } from 'react-spinners';
 
 
 const Artist = () => {
+  const [artistData, setArtistData] = useState([]);
+  const artistId = useSelector((state) => state.artist.artistId);
+  const [loading, setLoading] = useState(false);
 
-  const songsList = [
-    {
-      id: 1,
-      posterLink: 'https://example.com/poster1.jpg',
-      name: 'Song 1',
-      artist: 'Artist 1',
-    },
-    {
-      id: 2,
-      posterLink: 'https://example.com/poster2.jpg',
-      name: 'Song 2',
-      artist: 'Artist 2',
-    },
-    
-    // Add more song objects as needed
-  ];
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        const response = await apiService.get(`/artist/${artistId}`);
+
+        setArtistData(response.data);
+        console.log("Artist data:", response.data);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching artist data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [artistId]); // Include artistId as a dependency if it's used inside the useEffect
+
+
+  // if (loading) {
+  //   return <SyncLoader color='royalblue' />;
+  // }
+  const songsList = artistData.songs;
+
+ 
 
   // Sample state for play/pause functionality
   const [isPlaying, setIsPlaying] = useState(false);
@@ -48,11 +67,12 @@ const Artist = () => {
 
   return (
     <div className='page-wrapper'>
+
       <div className='profile' >
-        <img src="https://e-cdn-images.dzcdn.net/images/artist/033d460f704896c9caca89a1d753a137/500x500-000000-80-0-0.jpg" alt="broken" />
+        <img src={artistData.cover} alt="broken" />
         <div className='profile-text'>
-          <p className='profile-name'>The Weeknd</p>
-          <p className='profile-desc'>The Weeknd, a Canadian artist, is recognized for his soulful voice and chart-topping hits.</p>
+          <p className='profile-name'>{artistData.name}</p>
+          <p className='profile-desc'>{artistData.profile}</p>
         </div>
       </div>
       <div className="songs-table">
@@ -68,7 +88,7 @@ const Artist = () => {
             </tr>
           </thead>
           <tbody>
-            {songsList.map(song => (
+            { (songsList !== undefined )? songsList.map(song => (
               <tr key={song.id} onClick={() => playPauseSong(song.id)}>
                 <td>{song.id}</td>
                 <td><img src={song.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} /></td>
@@ -89,7 +109,7 @@ const Artist = () => {
                   </form>
                 </td>
               </tr>
-            ))}
+            )): <tr>no songs yet</tr>  }
           </tbody>
         </table>
       </div>

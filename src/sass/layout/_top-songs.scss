@@ -98,3 +98,68 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+
+    .topsongs {
+        height: auto; /* Remove fixed height */
+        width: 100%; /* Full width */
+        margin: 10px 0 0 0; /* Adjust margins */
+        padding: 5px;
+
+        .header-ctn {
+            margin: 0 5px; /* Reduce margins */
+            padding: 5px; /* Reduce padding */
+            
+            .a {
+                font-size: 12px; /* Reduce font size */
+            }
+        }
+
+        .songs {
+            table-layout: fixed; /* Ensure fixed width columns */
+            width: 100%;
+
+            td {
+                padding: 5px 0; /* Reduce padding */
+                max-height: initial; /* Allow content to fit */
+
+                img {
+                    height: 30px; /* Reduce image size */
+                }
+
+                .songName {
+                    font-size: 14px; /* Reduce font size */
+                }
+              
+
+                .rank {
+                    padding: 3px 0px; /* Reduce padding */
+                    font-size: 12px; /* Reduce font size */
+                }
+            }
+            .artist-name{
+                visibility: hidden;
+            }
+
+            .row {
+                height: auto; /* Remove fixed height */
+                padding: 5px; /* Add padding for touch */
+            }
+        }
+
+        .play {
+            padding: 0px; /* Increase touch target size */
+            font-size: 12px; /* Reduce font size */
+        }
+
+        form {
+            display: flex; /* Switch to flexbox for horizontal layout */
+            justify-content: space-between;
+
+            button {
+                padding: 4px; /* Increase padding for touch */
+            }
+        }
+    }
+}

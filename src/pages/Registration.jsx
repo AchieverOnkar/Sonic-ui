@@ -58,6 +58,7 @@ const Registration = () => {
 
                 <form onSubmit={formik.handleSubmit}>
                     <fieldset className='register-form'>
+                        <div className="logo"><i class="ri-flashlight-line"></i><span>SONIC</span></div>
                         <div className="field-wrapper">
                             <label for="username">Username </label>
                             <input type="text"
@@ -152,7 +153,7 @@ const Registration = () => {
                         <span>Already have the account?</span>
                         <a href="/login">Login</a>
                     </div>
-                    <button type="submit" disabled={loading}  className='submit-btn' >{loading? <SyncLoader color='white' size={5}/> : "Register"}</button>
+                    <button type="submit" disabled={loading} className='submit-btn' >{loading ? <SyncLoader color='white' size={5} /> : "Register"}</button>
                 </form>
 
 

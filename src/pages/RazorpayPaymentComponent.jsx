@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const RazorpayPaymentComponent = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const RazorpayPaymentComponent = () => {
         key: 'rzp_test_vx3Eg3PqiTEmHO',
         amount: parsedOrder.amount_due.toString(),
         currency: 'INR',
-        name: 'TuneHub',
+        name: 'Sonic',
         description: 'Test Transaction',
         order_id: parsedOrder.id,
         handler: function (response) {
@@ -47,27 +48,32 @@ const RazorpayPaymentComponent = () => {
     try {
       const requestData = { params: { orderId, paymentId, signature } };
       console.log('Request Data:', requestData);
-      alert(JSON.stringify(requestData));
-      const isValid = await apiService.post('/verify', { orderId, paymentId, signature } );
+      const isValid = await apiService.post('/verify', { orderId, paymentId, signature });
 
-      if (isValid.data) {
-        setOrderStatus('success');
-        const email = sessionStorage.getItem('email')
-        const res = apiService.get('/payment-success',{params: {email}})
-        if(res.data === 'success'){
-          navigate('/login');
+      ; (async () => {
+        if (isValid.data) {
+          setOrderStatus('success');
+          const email = sessionStorage.getItem('email')
+          const res = await apiService.get('/payment-success', { params: { email } })
+          if (res.data === "success") {
+            toast.success("redirecting to login page")
+            navigate("/login");
+          }
+
+        } else {
+          toast.error("payment failed ! try again")
+          navigate('/pay');
         }
 
-      } else {
-        
-        navigate('/pay');
-      }
+      })()
+
+
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  (orderStatus === 'success') ? alert("payment success") : "";
+  (orderStatus === 'success') ? toast.success("payment success") : toast.error("payment failed");
 
   return (
     <div>
@@ -81,7 +87,7 @@ const RazorpayPaymentComponent = () => {
       </form>
 
       {orderStatus && (
-        <div>
+        <div className='ctn'>
           {orderStatus === 'success' ? (
             <p>Payment successful</p>
           ) : (
