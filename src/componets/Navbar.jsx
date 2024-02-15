@@ -86,7 +86,7 @@ export default function Navbar() {
             </button>
           </div>
         )}
-        <div className="logo"><Link to="/">⚡ SONIC</Link></div>
+        <div className="logo"><Link to="/user">⚡ SONIC</Link></div>
 
 
         <button onClick={handleLogout} disabled={loading} className='submit-btn'>
