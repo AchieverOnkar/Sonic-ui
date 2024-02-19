@@ -13,7 +13,7 @@ import { resetCurrentSongId, setCurrentSongId } from '../features/playerSlice';
 export default function Sidebar() {
   const [songsList, setsongsList] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState(1);
   const audioRef = useRef(null);
   const dispatch = useDispatch();
 

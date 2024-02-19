@@ -87,8 +87,8 @@ const ViewFavorite = () => {
             <thead>
               <tr>
                 <td>Poster</td>
-                <td>Artist</td>
                 <td>Song</td>
+                <td>Artist</td>
                 <td>Genre</td>
                 <td>Play</td>
                 <td>Remove</td>
@@ -100,8 +100,8 @@ const ViewFavorite = () => {
                   <td>
                     <img src={songs.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} />
                   </td>
-                  <td>{songs.artist}</td>
                   <td>{songs.name}</td>
+                  <td>{songs.artist}</td>
                   <td>{songs.genre}</td>
                   <td >
                     <button className='play' onClick={() => playPauseSong(songs.id)}>

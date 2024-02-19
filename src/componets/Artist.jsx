@@ -81,7 +81,7 @@ const Artist = () => {
                   <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e, song.id) }} >
                     <input type="hidden" name="songId" value={song.id} />
                     <button type="submit" onClick={() => changeButtonState(song.id)}>
-                      submit
+                      <i className="ri-heart-3-fill"></i>
                     </button>
                   </form>
                 </td>
