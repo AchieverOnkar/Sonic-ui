@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import apiService from '../services/apiService';
 import { SyncLoader } from 'react-spinners';
+import { setSongId } from '../features/playerSlice';
 
 const Playlist = () => {
   const [playlist, setPlaylist] = useState([]);
   const [loading, setLoading] = useState(false);
-
-
+  const dispatch = useDispatch();
   const playlistId = useSelector(state => state.playlist.playlistId);
+  const currentSongId = useSelector(state => state.player.currentSongId);
+
 
   useEffect(() => {
     ; (async () => {
@@ -21,9 +23,7 @@ const Playlist = () => {
         setPlaylist(response.data);
         console.log(response.data);
         console.log("assinged data");
-
         setLoading(false);
-
       } catch (error) {
         setLoading(false);
         console.log(error);
@@ -34,37 +34,20 @@ const Playlist = () => {
   }, [playlistId])
 
   const songsList = playlist.songs;
-  // Sample state for play/pause functionality
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongIndex, setCurrentSongIndex] = useState(null);
 
-  // Sample function for play/pause functionality
-  const playPauseSong = (id) => {
-    // Implement your play/pause logic here
-    setIsPlaying(!isPlaying);
-    setCurrentSongIndex(id);
-  };
-
-  // Sample function for form submission
-  const handleSubmit = (e, songId) => {
-    // Implement your form submission logic here
-  };
-
-  // Sample function for changing button state
-  const changeButtonState = (songId) => {
-    // Implement your button state change logic here
+  const playPauseSong = (songIndex) => {
+    dispatch(setSongId(songIndex));
+    console.log("songid dispached:",songIndex);
   };
 
 
-  if (loading) {
-    return (
-      <SyncLoader color='royalblue' />
-    )
-  }
+
+  
 
 
 
-  return (
+
+  return loading ? <SyncLoader color='royalblue' /> : (
     <div className='page-wrapper'>
 
       <div className='profile'  >
@@ -98,7 +81,7 @@ const Playlist = () => {
 
                 <td >
                   <button className='play' onClick={() => playPauseSong(song.id)}>
-                    {isPlaying && currentSongIndex === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
+                    {currentSongId === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
                   </button>
                 </td>
                 <td>

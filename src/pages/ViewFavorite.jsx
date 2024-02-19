@@ -4,14 +4,16 @@ import SyncLoader from 'react-spinners/SyncLoader';
 import apiService from '../services/apiService';
 import toast from 'react-hot-toast';
 import heart from '../assets/heart.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { setSongId } from '../features/playerSlice';
 
 
 const ViewFavorite = () => {
-
   const [favoriteSongs, setFavoriteSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const dispatch = useDispatch();
+  const currentSongId = useSelector(state => state.player.currentSongId);
   const [updating, setUpdating] = useState(false);
 
   const handleSubmit = async (e, songId) => {
@@ -53,11 +55,7 @@ const ViewFavorite = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <SyncLoader color='royalblue' />
-    )
-  }
+
   if (error) {
     return (
       <>
@@ -66,11 +64,15 @@ const ViewFavorite = () => {
     )
   }
 
+  const playPauseSong = (songIndex) => {
+    dispatch(setSongId(songIndex));
+    console.log("songid dispached:", songIndex);
+  };
 
 
 
 
-  return (
+  return loading ? <SyncLoader color='royalblue' /> :(
     <div className='page-wrapper'>
       <div className="profile">
         <img className='small' src={heart} alt="broken" />
@@ -94,22 +96,22 @@ const ViewFavorite = () => {
             </thead>
             <tbody>
               {favoriteSongs.map(songs => (
-                <tr key={songs.id}>
+                <tr key={songs.id} onClick={() => playPauseSong(songs.id)}>
                   <td>
                     <img src={songs.posterLink} alt="Poster" style={{ maxWidth: '50px', maxHeight: '50px' }} />
                   </td>
                   <td>{songs.artist}</td>
                   <td>{songs.name}</td>
                   <td>{songs.genre}</td>
-                  <td>
-                    <audio controls>
-                      <source src={songs.link} type="audio/mpeg" />
-                    </audio>
+                  <td >
+                    <button className='play' onClick={() => playPauseSong(songs.id)}>
+                      {currentSongId === songs.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
+                    </button>
                   </td>
                   <td>
                     <form onSubmit={(e) => handleSubmit(e, songs.id)} >
                       <input type="hidden" name="songId" value={songs.id} />
-                      <button type="submit" disabled={updating}>Remove</button>
+                      <button type="submit" className='removeBtn' disabled={updating} style={{backgroundColor:'#e83e3e'}}><i class="ri-close-fill"></i></button>
                     </form>
                   </td>
                 </tr>

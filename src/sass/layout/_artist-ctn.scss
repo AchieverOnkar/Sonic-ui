@@ -4,9 +4,12 @@
 .artist-ctn {
     @include h.flexbox(column, space-evenly, flex-start);
     width: 100%;
+    
     height: 130px;
     background-color: var(--fg-color);
     min-width: 100%;
+    min-width: 78vw;
+    // background-color: aqua;
     padding: 0 15px;
     border-radius: 5px;
 

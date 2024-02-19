@@ -134,3 +134,15 @@
         }
     }
 }
+.removeBtn{
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    background: #e83e3e;
+    padding: 3px 5px;
+    border: none;
+    &:hover{
+        background-color: #f31919;
+    }
+}

@@ -4,19 +4,14 @@ import SyncLoader from 'react-spinners/SyncLoader';
 import toast from 'react-hot-toast';
 import play from '../assets/play.png'
 import play1 from '../assets/play1.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { setSongId } from '../features/playerSlice';
 
 const ViewAllSongs = () => {
-    const [currentSongIndex, setCurrentSongIndex] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(null);
+    const dispatch = useDispatch();
     const [updating, setUpdating] = useState(false);
     const [isError, setIsError] = useState(false);
-    const favbuttonFlag = { songId: 0, isActive: false };
 
-    const changeButtonState = (songId) => {
-        favbuttonFlag.songId = songId;
-        favbuttonFlag.isActive = !favbuttonFlag.isActive;
-    }
 
     const handleSubmit = async (e, songId) => {
         e.preventDefault();
@@ -61,6 +56,7 @@ const ViewAllSongs = () => {
                     setsongsList(response.data);
                     console.log(response.data);
                     setIsLoading(false);
+                    console.log("dome");
                 }
 
             } catch (error) {
@@ -72,63 +68,20 @@ const ViewAllSongs = () => {
         fetchData();
     }, [songsList]);
 
-    if (isLoading) {
-        return (
-            <SyncLoader color="royalblue" />
-        )
-    }
-    if (error || isError) {
-        return (
-            <h1 className='error'>something went wrong</h1>
-        )
-    }
 
 
+
+
+    const currentSongId = useSelector(state => state.player.currentSongId);
 
     const playPauseSong = (songIndex) => {
-        if (audioRef.current) {
-            // If the same song is clicked, toggle play/pause
-            if (currentSongIndex === songIndex) {
-                if (isPlaying) {
-                    audioRef.current.pause();
-                } else {
-                    audioRef.current.play();
-                }
-                setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-            } else {
-                // Play a new song
-                audioRef.current.src = songsList[songIndex].link;
-                audioRef.current.play();
-                setCurrentSongIndex(songIndex);
-                setIsPlaying(true);
-            }
-        }
+        dispatch(setSongId(songIndex));
     };
+    return isLoading? <SyncLoader color='royalblue' /> :(
 
-
-    const stopSong = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-        }
-    };
-
-    const playNextSong = () => {
-        const nextIndex = (currentSongIndex + 1) % songsList.length;
-        playPauseSong(nextIndex);
-    };
-
-    const playPreviousSong = () => {
-        const prevIndex = (currentSongIndex - 1 + songsList.length) % songsList.length;
-        playPauseSong(prevIndex);
-    };
-
-
-
-    return (
         <div className='page-wrapper'>
             <div className='profile' >
-                <img  className='small' src={play1} alt="broken" />
+                <img className='small' src={play1} alt="broken" />
                 <div className="profile-text" >
                     <p className='profile-name large'>Songs</p>
                     <p className='profile-desc'>Explore a diverse collection of songs from your favorite artists and genres.</p>
@@ -156,15 +109,15 @@ const ViewAllSongs = () => {
 
                                 <td className='playPause'>
                                     <button className='play' onClick={() => playPauseSong(song.id)}>
-                                        {isPlaying && currentSongIndex === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
+                                        {currentSongId === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
+
                                     </button>
                                 </td>
                                 <td>
                                     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e, song.id) }} >
                                         <input type="hidden" name="songId" value={song.id} />
-                                        <button type="submit" disabled={updating} onClick={() => changeButtonState(song.id)}>
-                                            {(favbuttonFlag.songId === song.id && favbuttonFlag.isActive !== true) ?
-                                                <i className="ri-heart-3-line"></i> : <i className="ri-heart-3-fill"></i>}
+                                        <button type="submit" disabled={updating}>
+                                            <i className="ri-heart-3-fill"></i>
                                         </button>
 
                                     </form>
@@ -175,19 +128,8 @@ const ViewAllSongs = () => {
                 </table>
             </div>
 
-            {currentSongIndex !== null && (
-                <div className="currently-playing">
-                    <img src={songsList[currentSongIndex].posterLink} alt="broken" style={{ maxWidth: '50px', maxHeight: '50px' }} />
-                    <p>Now Playing: {songsList[currentSongIndex].name} by {songsList[currentSongIndex].artist}</p>
-                    <div>
-                        <button onClick={playPreviousSong}>Previous</button>
-                        <button onClick={stopSong}>Stop</button>
-                        <button onClick={playNextSong}>Next</button>
-                    </div>
-                </div>
-            )}
-            <audio ref={audioRef} />
         </div>
+
     );
 };
 

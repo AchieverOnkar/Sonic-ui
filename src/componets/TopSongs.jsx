@@ -3,50 +3,21 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import apiService from '../services/apiService';
 import SyncLoader from 'react-spinners/SyncLoader';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSongId } from '../features/playerSlice';
 
 
 export default function TopSongs() {
-    const [currentSongIndex, setCurrentSongIndex] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(null);
+    const dispatch = useDispatch();
     const [songsList, setSongsList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
 
+    const currentSongId = useSelector(state => state.player.currentSongId);
+
     const playPauseSong = (songIndex) => {
-        if (audioRef.current && currentSongIndex === songIndex) {
-            // Toggle play/pause if the same song is clicked
-            if (isPlaying) {
-                audioRef.current.pause();
-            } else {
-                audioRef.current.play();
-            }
-            setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-        } else {
-            // Play a new song
-            audioRef.current.src = songsList[songIndex].link;
-            audioRef.current.play();
-            setCurrentSongIndex(songIndex);
-            setIsPlaying(true);
-        }
-    };
-
-    const stopSong = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-        }
-    };
-
-    const playNextSong = () => {
-        const nextIndex = (currentSongIndex + 1) % songsList.length;
-        playPauseSong(nextIndex);
-    };
-
-    const playPreviousSong = () => {
-        const prevIndex = (currentSongIndex - 1 + songsList.length) % songsList.length;
-        playPauseSong(prevIndex);
+        dispatch(setSongId(songIndex));
     };
 
 
@@ -101,7 +72,7 @@ export default function TopSongs() {
                             <td className='artist-name'>{song.artist}</td>
                             <td >
                                 <button className='play' onClick={() => playPauseSong(song.id)}>
-                                    {isPlaying && currentSongIndex === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
+                                    {currentSongId === song.id ? <i class="ri-pause-fill"></i> : <i class="ri-play-mini-fill"></i>}
                                 </button>
                             </td>
                             <td>
